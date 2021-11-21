@@ -1,6 +1,8 @@
-import pandas as pd
-import sys
 import os
+import sys
+
+import pandas as pd
+
 sys.path.append(os.getcwd())
 from sklearn.model_selection import train_test_split
 
