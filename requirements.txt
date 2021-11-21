@@ -1,4 +1,6 @@
-python==3.8
+dvc[s3]
+pandas_profiling
+pandas
 numpy
 pandas
 scikit-learn
