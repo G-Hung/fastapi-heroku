@@ -1,6 +1,8 @@
 import numpy as np
 from sklearn.preprocessing import LabelBinarizer, OneHotEncoder
 
+from mltraining.config import logger
+
 
 def process_data(
     X, categorical_features=[], label=None, training=True, encoder=None, lb=None
@@ -43,7 +45,7 @@ def process_data(
         Trained LabelBinarizer if training is True, otherwise returns the binarizer
         passed in.
     """
-
+    logger.info("start to process data")
     if label is not None:
         y = X[label]
         X = X.drop([label], axis=1)
