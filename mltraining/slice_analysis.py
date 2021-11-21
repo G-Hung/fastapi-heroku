@@ -41,6 +41,6 @@ if __name__ == "__main__":
     LABEL_BINARIZER = pd.read_pickle("model/label_binarizer.pkl")
     LABEL = label
 
-    FEATURES = ["education"]
+    FEATURES = ["race"]
     for feature in FEATURES:
         performance_by_feature_slice(DATA, feature, MODEL, ENCODER, LABEL_BINARIZER)
