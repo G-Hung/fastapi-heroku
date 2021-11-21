@@ -59,6 +59,7 @@ def test_post_low_income():
     assert response.status_code == 200
     assert response.json() == {"Income": "<=50K"}
 
+
 def test_post_fail():
     data = {
         # "age": 49,
@@ -100,5 +101,5 @@ def test_post_fail_gt_zero():
     }
     with TestClient(app) as client:
         response = client.post("/predict", json=data)
-    assert response.json()['detail'][0]['type']=='value_error.number.not_gt'
+    assert response.json()["detail"][0]["type"] == "value_error.number.not_gt"
     assert response.status_code == 422
