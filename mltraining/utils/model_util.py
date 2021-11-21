@@ -1,5 +1,7 @@
 from sklearn.metrics import fbeta_score, precision_score, recall_score
-
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import RandomizedSearchCV
+from config import logger
 
 # Optional: implement hyperparameter tuning.
 def train_model(X_train, y_train):
@@ -17,8 +19,25 @@ def train_model(X_train, y_train):
     model
         Trained machine learning model.
     """
+    rf = RandomForestClassifier()
+    rf_params = {
+        "n_estimators": [50, 100, 150, 200],
+        "max_features": ["auto", "sqrt", "log2", None],
+        "criterion" : ["gini", "entropy"]
+    }
+    logger.info("Start randomized search")
+    clf = RandomizedSearchCV(rf, rf_params)
+    clf.fit(X_train, y_train)
+    model_score, best_params, best_score = (
+        clf.best_estimator_,
+        clf.best_params_,
+        clf.best_score_,
+    )
+    logger.info("Export result to model_info.txt")
+    with open(f"model/model_info.txt", "w") as f:
+        f.write(f"Model: {model_score}\nScore: {best_score}\nParams: {best_params}")
 
-    pass
+    return clf.best_estimator_
 
 
 def compute_model_metrics(y, preds):
@@ -57,4 +76,4 @@ def inference(model, X):
     preds : np.array
         Predictions from the model.
     """
-    pass
+    return model.predict(X)

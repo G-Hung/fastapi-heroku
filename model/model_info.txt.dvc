@@ -1,0 +1,4 @@
+outs:
+- md5: e467717ce652b0b8c38e1ce5bdab5923
+  size: 171
+  path: model_info.txt
