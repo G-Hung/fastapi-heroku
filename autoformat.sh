@@ -5,8 +5,10 @@
 
 echo 'Running isort'
 isort -rc mltraining/*
+isort -rc api/*
 
 echo 'Running black'
 black mltraining/*.py
+black api/*.py
 
 echo 'Finished auto formatting'
