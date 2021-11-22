@@ -1,3 +1,4 @@
+import os
 import pickle
 
 import pandas as pd
@@ -8,6 +9,12 @@ from api.api_model import *
 from mltraining.train_model import cat_features
 from mltraining.utils.data_util import process_data
 from mltraining.utils.model_util import inference
+
+if "DYNO" in os.environ and os.path.isdir(".dvc"):
+    os.system("dvc config core.no_scm true")
+    if os.system("dvc pull") != 0:
+        exit("dvc pull failed")
+    os.system("rm -r .dvc .apt/usr/lib/dvc")
 
 app = FastAPI(
     title="Census data salary predictor", description="test", version=__version__,
