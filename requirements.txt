@@ -1,4 +1,4 @@
-dvc[s3]
+dvc[s3]==2.8.2
 pandas_profiling
 pandas
 numpy
