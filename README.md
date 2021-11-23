@@ -8,6 +8,8 @@ pip install -r requirements.txt
 
 ## Introduction
 
+repo: https://github.com/G-Hung/fastapi-heroku
+
 In the project, the interesting try is to use DVC and set S3 as remote location to store trained model and data. The advantage of this is we have lighter repo and we don't need to develop extra logic to download the data. `dvc pull` will follow the configurations in dvc files and pull them even the repo is deployed to another environment [and they need to have corresponding credentials for sure]
 
 ## GitHub Actions
