@@ -16,7 +16,7 @@ The evaluation data is used with the same pipeline in the training data, we sele
 
 ## Metrics
 The model was evaluated on test set
-Precision: 0.73, Recall: 0.60, F1: 0.658
+Precision: 0.73, Recall: 0.60, F1: 0.658, Accuracy: 0.86
 
 ## Ethical Considerations
 The data doesn't contains PII data and open to public, it shouldn't be a big concern
