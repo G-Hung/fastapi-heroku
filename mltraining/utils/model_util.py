@@ -30,16 +30,13 @@ def train_model(X_train, y_train):
     logger.info("Start randomized search")
     clf = RandomizedSearchCV(rf, rf_params)
     clf.fit(X_train, y_train)
-    model_score, best_params, best_score = (
+    model, best_params, best_score = (
         clf.best_estimator_,
         clf.best_params_,
         clf.best_score_,
     )
-    logger.info("Export result to model_info.txt")
-    with open(f"model/model_info.txt", "w") as f:
-        f.write(f"Model: {model_score}\nScore: {best_score}\nParams: {best_params}")
 
-    return clf.best_estimator_
+    return model, best_params, best_score
 
 
 def compute_model_metrics(y, preds):

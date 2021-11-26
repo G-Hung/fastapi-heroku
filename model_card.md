@@ -15,7 +15,8 @@ The data was obtained from the UCI ML repo https://archive.ics.uci.edu/ml/datase
 The evaluation data is used with the same pipeline in the training data, we select the required columns and apply the learned transformers to the columns. Testing data contains 20% of the data
 
 ## Metrics
-The model was evaluated using mean accuracy [0.855766053806917]
+The model was evaluated on test set
+Precision: 0.73, Recall: 0.60, F1: 0.658
 
 ## Ethical Considerations
 The data doesn't contains PII data and open to public, it shouldn't be a big concern
