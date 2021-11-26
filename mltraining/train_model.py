@@ -8,7 +8,7 @@ from sklearn.model_selection import train_test_split
 
 from mltraining.config import logger
 from mltraining.utils.data_util import process_data
-from mltraining.utils.model_util import train_model
+from mltraining.utils.model_util import compute_model_metrics, train_model
 
 cat_features = [
     "workclass",
@@ -40,7 +40,7 @@ def main():
 
     # Proces the test data with the process_data function.
     logger.info("Process testing data")
-    _, _, encoder, lb = process_data(
+    X_test, y_test, encoder, lb = process_data(
         test,
         categorical_features=cat_features,
         label=label,
@@ -48,10 +48,21 @@ def main():
         encoder=encoder,
         lb=lb,
     )
-    # Train and save a model.
+    # Train the model.
     logger.info("Training the model")
-    model = train_model(X_train, y_train)
+    model, best_params, _ = train_model(X_train, y_train)
 
+    # Evaluate on test set
+    precision, recall, fbeta = compute_model_metrics(y_test, model.predict(X_test))
+    logger.info("Export result to model_info.txt")
+    with open(f"model/model_info.txt", "w") as f:
+        f.write(
+            f"""Model: {model}
+        precision: {precision}; recall: {recall}; fbeta: {fbeta}
+        Params: {best_params}"""
+        )
+
+    # export the artifacts
     logger.info("Export artifacts to model folder")
     for obj, name in zip([model, encoder, lb], ["model", "encoder", "label_binarizer"]):
         pd.to_pickle(obj, f"model/{name}.pkl")
